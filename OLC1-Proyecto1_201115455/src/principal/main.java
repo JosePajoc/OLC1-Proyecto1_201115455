@@ -8,11 +8,17 @@ public class main {
         //analizadores("src/statpy/","lexer.jflex","parser.cup");
         
         String entrada = """
-                    123
-                    hola
+                    
+                    10     
+                    12
+                    8   
+                         
                     """;
         
         analizar(entrada);
+        System.out.println("#######################");
+        System.out.println("La traduccion es:");
+        System.out.println(statpy.Parser.resultado);
     }
     
     //crea las clases Lexer, Parser y sym - Generar analizadores

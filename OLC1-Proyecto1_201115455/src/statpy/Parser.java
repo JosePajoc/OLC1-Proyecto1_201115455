@@ -31,7 +31,9 @@ public class Parser extends java_cup.runtime.lr_parser {
   /** Production table. */
   protected static final short _production_table[][] = 
     unpackFromStrings(new String[] {
-    "\000\002\000\002\002\004\000\002\002\003" });
+    "\000\006\000\002\002\004\000\002\002\003\000\002\003" +
+    "\004\000\002\003\003\000\002\004\003\000\002\005\003" +
+    "" });
 
   /** Access to production table. */
   public short[][] production_table() {return _production_table;}
@@ -39,9 +41,11 @@ public class Parser extends java_cup.runtime.lr_parser {
   /** Parse-action table. */
   protected static final short[][] _action_table = 
     unpackFromStrings(new String[] {
-    "\000\004\000\004\004\005\001\002\000\004\002\006\001" +
-    "\002\000\004\002\000\001\002\000\004\002\001\001\002" +
-    "" });
+    "\000\010\000\004\004\010\001\002\000\006\002\000\004" +
+    "\010\001\002\000\006\002\ufffe\004\ufffe\001\002\000\004" +
+    "\002\011\001\002\000\006\002\ufffd\004\ufffd\001\002\000" +
+    "\006\002\ufffc\004\ufffc\001\002\000\004\002\001\001\002" +
+    "\000\006\002\uffff\004\uffff\001\002" });
 
   /** Access to parse-action table. */
   public short[][] action_table() {return _action_table;}
@@ -49,7 +53,9 @@ public class Parser extends java_cup.runtime.lr_parser {
   /** <code>reduce_goto</code> table. */
   protected static final short[][] _reduce_table = 
     unpackFromStrings(new String[] {
-    "\000\004\000\004\002\003\001\001\000\002\001\001\000" +
+    "\000\010\000\012\002\005\003\003\004\004\005\006\001" +
+    "\001\000\006\004\011\005\006\001\001\000\002\001\001" +
+    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
     "\002\001\001\000\002\001\001" });
 
   /** Access to <code>reduce_goto</code> table. */
@@ -144,11 +150,53 @@ class CUP$Parser$actions {
           return CUP$Parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 1: // inicio ::= ENTERO 
+          case 1: // inicio ::= lista_ins 
             {
               Object RESULT =null;
 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("inicio",0, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+            }
+          return CUP$Parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 2: // lista_ins ::= lista_ins instruccion 
+            {
+              Object RESULT =null;
+
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("lista_ins",1, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+            }
+          return CUP$Parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 3: // lista_ins ::= instruccion 
+            {
+              Object RESULT =null;
+
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("lista_ins",1, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+            }
+          return CUP$Parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 4: // instruccion ::= imprimir 
+            {
+              Object RESULT =null;
+		int valorleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
+		int valorright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
+		Object valor = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
+		  resultado = resultado + valor.toString() + "\n";  
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("instruccion",2, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+            }
+          return CUP$Parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 5: // imprimir ::= ENTERO 
+            {
+              Object RESULT =null;
+		int valorleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
+		int valorright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
+		String valor = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
+		 RESULT = valor; 
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("imprimir",3, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
 

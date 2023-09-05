@@ -1,5 +1,5 @@
 // ------------  Paquete e importaciones ------------
-package analizador;
+package statpy;
 
 import java_cup.runtime.*;
 
@@ -31,11 +31,19 @@ action code
 
 //------> Declaración de terminales
 terminal String ENTERO;
+terminal PARENTESIS_A;
+terminal PARENTESIS_C;
+terminal String CONSOLE;
 
 
 //------> Declaración de no terminales
 non terminal inicio;
+non terminal lista_ins;
+non terminal instruccion;
+non terminal imprimir;
 
+
+// ---------- Gramatica
 
 //------> Definir Simbolo Inicial
 start with inicio; 
@@ -43,6 +51,16 @@ start with inicio;
 
 // ------------>  Producciones  <------------
 
-inicio ::= ENTERO
+inicio ::= lista_ins
+;
+
+lista_ins::= lista_ins instruccion
+        | instruccion
+;
+
+instruccion::= imprimir:valor {:  resultado = resultado + valor.toString() + "\n";  :}
+;
+
+imprimir::= ENTERO:valor     {: RESULT = valor; :}
 ;
 

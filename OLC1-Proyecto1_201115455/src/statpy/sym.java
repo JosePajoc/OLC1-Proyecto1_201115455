@@ -9,12 +9,18 @@ package statpy;
 public class sym {
   /* terminals */
   public static final int error = 1;
+  public static final int PARENTESIS_C = 4;
+  public static final int PARENTESIS_A = 3;
+  public static final int CONSOLE = 5;
   public static final int EOF = 0;
   public static final int ENTERO = 2;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
-  "ENTERO"
+  "ENTERO",
+  "PARENTESIS_A",
+  "PARENTESIS_C",
+  "CONSOLE"
   };
 }
 
